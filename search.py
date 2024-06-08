@@ -4,6 +4,7 @@ import glob
 import dill
 import argparse
 import pathlib
+import chardet
 baseDir = pathlib.Path(__file__).parent.resolve()
 
 TXT_DIR = os.path.join(baseDir, "txt")
@@ -106,7 +107,7 @@ def load_txt_data():
         # load from file
         FILE_PATHS = glob.glob(os.path.join(TXT_DIR, "*.txt"))
         for file in FILE_PATHS:
-            f = open(file, "r", encoding="UTF-16")
+            f = open(file, "r", encoding=get_file_encoding(file)) 
             try:
                 txt = f.read()
             except:
@@ -196,6 +197,13 @@ def search(target_wd, context1_wd=None, context2_wd=None, excluding=None, range:
             })
     
     return ret
+
+
+def get_file_encoding(filepath):
+    with open(filepath, 'rb') as f:
+        c = f.read()
+        result = chardet.detect(c)
+    return result['encoding']
 
 if __name__ == "__main__":
     main()
