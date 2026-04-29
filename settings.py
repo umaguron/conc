@@ -1,0 +1,1 @@
+PDF_SEARCH_DIR = "/Users/..." # path of directory including PDF files

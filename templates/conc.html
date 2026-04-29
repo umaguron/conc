@@ -29,6 +29,10 @@
     <div class="container">
         <form action="conc_test" method="post">
             <div class="row">
+                <div class="col-1">
+                    <label class="form-check-label">Case sensitive</label>
+                    <input type="checkbox" class="form-check-input" name="is_case_sensitive" value="uses" {% if form %}{% if form.is_case_sensitive == "uses" %} checked {% endif %}{% endif %}>
+                </div>
                 <div class="col-2">
                     <label class="form-label">Target word</label>
                     <input type="text" class="form-control" name="target" value="{% if form %}{{ form.target }}{% endif %}">
@@ -45,7 +49,7 @@
                     <label class="form-label">Excluding word</label>
                     <input type="text" class="form-control" name="excluding" value="{% if form %}{{ form.excluding }}{% endif %}">
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label class="form-label">Range</label>
                     <div class="input-group ">
                         <input type="number" class="form-control" name="range_bf" step="5" max="0" placeholder="range -" value="{% if form %}{{ form.range_bf }}{% else %}-40{% endif %}" required>
@@ -61,7 +65,7 @@
                 {% if results %}
                 {% for r in results -%}
                 <!-- | safe を入れてhtmlをエスケープしないようにする-->
-                <tr><td>{{r.pos}}</td><td>{{r.context|safe}}</td><td><a href="{{r.link}}">{{r.file}}</a></td></tr>
+                <tr><td>{{r.pos}}</td><td>{{r.context|safe}}</td><td><a href="{{r.link}}">{{r.file}}</a></td><td><b><a href="#" onclick="fetch('{{r.showpdflink}}'); return false;">PDF</a></b></td></tr>
                 {%- endfor %}
                 {% endif %}
             </tbody>
