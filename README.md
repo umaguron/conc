@@ -2,6 +2,7 @@
 * flask
 * dill
 * chardet
+* pdfminer.six
 
 # Usage
 1. Put text files in the directory "txt_converted/" or execute "python pdf2txt.py"
